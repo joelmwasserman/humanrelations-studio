@@ -30,11 +30,14 @@ export default function Home() {
         {/* 1. HERO: headline, 2x2 mosaic image, 3 staggered tags */}
         <section className="hero">
           <h1 className="hero-h1">Blazing fast brand<br />sprints for startups</h1>
-          <div className="hero-mosaic">
-            <div className="mc mc-tl"></div>
-            <div className="mc mc-tr"><span className="mc-badge">↗ Rebel<br/>CASH</span></div>
-            <div className="mc mc-bl"></div>
-            <div className="mc mc-br"></div>
+          <div className="hero-video">
+            <div className="hero-video-inner">
+              <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                <circle cx="24" cy="24" r="24" fill="rgba(255,255,255,0.15)"/>
+                <polygon points="20,16 36,24 20,32" fill="white"/>
+              </svg>
+              <span className="hero-video-label">Your reel here</span>
+            </div>
           </div>
           <div className="hero-tags">
             <span className="htag">→ LOOK 10X BIGGER</span>
