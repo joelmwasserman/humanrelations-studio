@@ -31,7 +31,8 @@ body { font-family: var(--font); background: var(--off); color: var(--black); -w
 .nav-cta:hover { background: rgba(0,0,0,0.05); }
 .nav-cta-icon { width: 22px; height: 22px; background: var(--black); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 .nav-cta-icon svg { display: block; }
-.nav-hamburger { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
+.nav-contact-btn { font-size: 14px; color: var(--white); background: var(--black); text-decoration: none; padding: 7px 18px; border-radius: 100px; transition: opacity 0.2s; }
+.nav-contact-btn:hover { opacity: 0.75; }
 .nav-hamburger span { display: block; width: 22px; height: 2px; background: var(--black); margin: 5px 0; border-radius: 2px; }
 
 /* ─── 1. HERO ─── */

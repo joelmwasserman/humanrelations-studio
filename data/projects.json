@@ -1,0 +1,46 @@
+[
+  {
+    "slug": "lovable",
+    "name": "Lovable",
+    "tagline": "Brand identity for an AI-powered product studio",
+    "category": "Brand Sprint",
+    "year": "2024",
+    "bg": "linear-gradient(135deg, #d040b8 0%, #5040d8 100%)",
+    "dark": false,
+    "description": "Full brand identity from zero to launch in two weeks. Logo, color system, typography, and brand guidelines.",
+    "deliverables": ["Logo system", "Color palette", "Typography", "Brand guidelines", "Social templates"]
+  },
+  {
+    "slug": "craft",
+    "name": "Craft",
+    "tagline": "Workspace tools reimagined for modern teams",
+    "category": "Brand Sprint",
+    "year": "2024",
+    "bg": "#b8dde8",
+    "dark": true,
+    "description": "A clean, minimal identity that lets the product speak. Sprint delivered in 11 days.",
+    "deliverables": ["Logo system", "Color palette", "Typography", "Brand guidelines", "App icon"]
+  },
+  {
+    "slug": "loti",
+    "name": "Loti",
+    "tagline": "Digital rights protection for creators",
+    "category": "Brand Sprint",
+    "year": "2024",
+    "bg": "linear-gradient(120deg, #8898a8 0%, #607080 100%)",
+    "dark": false,
+    "description": "Bold, trustworthy identity for a company protecting creators online.",
+    "deliverables": ["Logo system", "Color palette", "Typography", "Brand guidelines", "Website design"]
+  },
+  {
+    "slug": "gist",
+    "name": "Gist",
+    "tagline": "AI-powered news, distilled",
+    "category": "Brand Sprint",
+    "year": "2023",
+    "bg": "#111",
+    "dark": false,
+    "description": "Dark, editorial identity for a next-gen media product.",
+    "deliverables": ["Logo system", "Color palette", "Typography", "Brand guidelines", "App icon"]
+  }
+]
