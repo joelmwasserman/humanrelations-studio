@@ -1,58 +1,39 @@
-import Head from 'next/head'
 import { useState } from 'react'
 import { useRouter } from 'next/router'
-
-// Simple hardcoded auth for a static site. 
-// For production, use NextAuth or a proper auth service.
-const ADMIN_PASSWORD = 'studio2024'
+import Head from 'next/head'
 
 export default function AdminLogin() {
-  const router = useRouter()
-  const [password, setPassword] = useState('')
+  const [pw, setPw] = useState('')
   const [error, setError] = useState('')
+  const router = useRouter()
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    if (password === ADMIN_PASSWORD) {
-      // Store in sessionStorage (cleared when browser closes)
-      sessionStorage.setItem('admin_authed', 'true')
+    if (pw === 'studio2024') {
+      localStorage.setItem('hr_admin', '1')
       router.push('/admin')
     } else {
-      setError('Incorrect password. Try again.')
+      setError('Wrong password')
     }
   }
 
   return (
     <>
-      <Head>
-        <title>Admin Login | Human Relations Studio</title>
-        <meta name="robots" content="noindex" />
-      </Head>
-
+      <Head><title>Admin | Human Relations</title></Head>
       <div className="admin-login">
-        <div className="login-card">
-          <div className="login-logo">Human Relations Studio</div>
-          <h1 className="login-title">Welcome back</h1>
-          <p className="login-subtitle">Sign in to manage your projects</p>
-
-          {error && <div className="login-error">{error}</div>}
-
-          <form onSubmit={handleSubmit}>
-            <div className="login-field">
-              <label className="login-label">PASSWORD</label>
-              <input
-                type="password"
-                className="login-input"
-                placeholder="Enter password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                autoFocus
-              />
-            </div>
-            <button type="submit" className="login-btn">Sign in</button>
-          </form>
-        </div>
+        <form className="admin-box" onSubmit={handleSubmit}>
+          <div className="admin-logo">Human Relations</div>
+          <h2 className="admin-title">Studio admin</h2>
+          <input
+            className="admin-input"
+            type="password"
+            placeholder="Password"
+            value={pw}
+            onChange={e => { setPw(e.target.value); setError('') }}
+          />
+          {error && <p className="admin-error">{error}</p>}
+          <button className="admin-btn" type="submit">Sign in</button>
+        </form>
       </div>
     </>
   )

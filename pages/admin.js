@@ -1,254 +1,122 @@
-import Head from 'next/head'
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
+import Head from 'next/head'
 
-const DEFAULT_PROJECTS = [
-  { id: 1, name: 'Lovable', category: 'Full Brand', year: '2024', status: 'published' },
-  { id: 2, name: 'Craft', category: 'Full Brand', year: '2024', status: 'published' },
-  { id: 3, name: 'Loti', category: 'Brand Sprint', year: '2024', status: 'published' },
-  { id: 4, name: 'Gist', category: 'Brand Sprint', year: '2023', status: 'published' },
-  { id: 5, name: 'Heron', category: 'Full Brand', year: '2023', status: 'published' },
-  { id: 6, name: 'Paper', category: 'Brand Sprint', year: '2023', status: 'draft' },
+const STORAGE_KEY = 'hr_projects'
+
+const defaultProjects = [
+  { id: 1, name: 'Lovable',  category: 'Brand Sprint', bg: 'linear-gradient(135deg, #d040b8 0%, #5040d8 100%)', description: 'Full brand identity for AI startup.' },
+  { id: 2, name: 'Craft',   category: 'Brand Sprint', bg: '#b8dde8', description: 'Design system and brand for productivity tool.' },
+  { id: 3, name: 'Loti',    category: 'Brand Sprint', bg: 'linear-gradient(120deg, #8898a8 0%, #607080 100%)', description: 'Brand identity for fintech startup.' },
+  { id: 4, name: 'Gist',    category: 'Brand Sprint', bg: '#111', description: 'Dark brand for AI notes app.' },
+  { id: 5, name: 'Rebel',   category: 'Brand Sprint', bg: '#c8f040', description: 'Bold identity for challenger brand.' },
 ]
 
 export default function Admin() {
   const router = useRouter()
-  const [projects, setProjects] = useState(DEFAULT_PROJECTS)
-  const [showModal, setShowModal] = useState(false)
-  const [editingProject, setEditingProject] = useState(null)
-  const [form, setForm] = useState({ name: '', category: 'Brand Sprint', year: new Date().getFullYear().toString(), status: 'draft' })
-  const [activeNav, setActiveNav] = useState('projects')
+  const [projects, setProjects] = useState(defaultProjects)
+  const [editing, setEditing] = useState(null)
+  const [form, setForm] = useState({ name: '', category: '', bg: '', description: '' })
+  const [saved, setSaved] = useState(false)
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      if (!sessionStorage.getItem('admin_authed')) {
-        router.push('/admin-login')
-      }
-      const saved = localStorage.getItem('admin_projects')
-      if (saved) setProjects(JSON.parse(saved))
+      if (!localStorage.getItem('hr_admin')) { router.push('/admin-login'); return }
+      const stored = localStorage.getItem(STORAGE_KEY)
+      if (stored) setProjects(JSON.parse(stored))
     }
   }, [])
 
   const save = (updated) => {
     setProjects(updated)
-    localStorage.setItem('admin_projects', JSON.stringify(updated))
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(updated))
+    setSaved(true)
+    setTimeout(() => setSaved(false), 2000)
   }
 
-  const openAdd = () => {
-    setEditingProject(null)
-    setForm({ name: '', category: 'Brand Sprint', year: new Date().getFullYear().toString(), status: 'draft' })
-    setShowModal(true)
-  }
+  const startEdit = (p) => { setEditing(p.id); setForm({ name: p.name, category: p.category, bg: p.bg, description: p.description }) }
+  const startAdd = () => { setEditing('new'); setForm({ name: '', category: 'Brand Sprint', bg: '#cccccc', description: '' }) }
 
-  const openEdit = (project) => {
-    setEditingProject(project)
-    setForm({ name: project.name, category: project.category, year: project.year, status: project.status })
-    setShowModal(true)
-  }
-
-  const handleSave = () => {
-    if (!form.name.trim()) return
-    if (editingProject) {
-      save(projects.map(p => p.id === editingProject.id ? { ...editingProject, ...form } : p))
+  const submitForm = (e) => {
+    e.preventDefault()
+    if (editing === 'new') {
+      save([...projects, { ...form, id: Date.now() }])
     } else {
-      const newProject = { id: Date.now(), ...form }
-      save([...projects, newProject])
+      save(projects.map(p => p.id === editing ? { ...p, ...form } : p))
     }
-    setShowModal(false)
+    setEditing(null)
   }
 
-  const handleDelete = (id) => {
-    if (window.confirm('Delete this project?')) {
-      save(projects.filter(p => p.id !== id))
-    }
-  }
-
-  const handleLogout = () => {
-    sessionStorage.removeItem('admin_authed')
-    router.push('/admin-login')
-  }
+  const deleteProject = (id) => { if (confirm('Delete this project?')) save(projects.filter(p => p.id !== id)) }
 
   return (
     <>
-      <Head>
-        <title>Admin | Human Relations Studio</title>
-        <meta name="robots" content="noindex" />
-      </Head>
-
-      <div className="admin-layout">
+      <Head><title>Admin CMS | Human Relations</title></Head>
+      <div className="cms-wrap">
         {/* Sidebar */}
-        <aside className="admin-sidebar">
-          <div className="admin-logo">HRS Admin</div>
-
-          {[
-            { id: 'projects', label: '📁 Projects' },
-            { id: 'submissions', label: '📬 Submissions' },
-            { id: 'settings', label: '⚙️ Settings' },
-          ].map(item => (
-            <div
-              key={item.id}
-              className={`admin-nav-item ${activeNav === item.id ? 'active' : ''}`}
-              onClick={() => setActiveNav(item.id)}
-            >
-              {item.label}
-            </div>
-          ))}
-
-          <div style={{ marginTop: 'auto' }}>
-            <div className="admin-nav-item" onClick={handleLogout}>🚪 Logout</div>
-          </div>
-        </aside>
+        <div className="cms-sidebar">
+          <div className="cms-brand">Human Relations</div>
+          <nav className="cms-nav">
+            <span className="cms-nav-item cms-nav-active">Projects</span>
+          </nav>
+          <button className="cms-logout" onClick={() => { localStorage.removeItem('hr_admin'); router.push('/admin-login') }}>Sign out</button>
+        </div>
 
         {/* Main */}
-        <main className="admin-main">
-          {activeNav === 'projects' && (
-            <>
-              <div className="admin-header">
-                <h1 className="admin-title">Projects</h1>
-                <button className="admin-btn" onClick={openAdd}>+ Add project</button>
-              </div>
-
-              <div className="projects-table">
-                <div className="table-header">
-                  <span>Name</span>
-                  <span>Category</span>
-                  <span>Year</span>
-                  <span>Actions</span>
-                </div>
-
-                {projects.length === 0 && (
-                  <div style={{ padding: '40px 24px', textAlign: 'center', color: '#999', fontSize: 14 }}>
-                    No projects yet. Add your first one.
-                  </div>
-                )}
-
-                {projects.map(project => (
-                  <div key={project.id} className="table-row">
-                    <div className="table-cell name">
-                      {project.name}
-                      <span
-                        className={`status-badge ${project.status}`}
-                        style={{ marginLeft: 10, verticalAlign: 'middle' }}
-                      >
-                        {project.status}
-                      </span>
-                    </div>
-                    <div className="table-cell muted">{project.category}</div>
-                    <div className="table-cell muted">{project.year}</div>
-                    <div className="table-actions">
-                      <button className="action-btn" onClick={() => openEdit(project)}>Edit</button>
-                      <button className="action-btn danger" onClick={() => handleDelete(project.id)}>Delete</button>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </>
-          )}
-
-          {activeNav === 'submissions' && (
-            <>
-              <div className="admin-header">
-                <h1 className="admin-title">Form Submissions</h1>
-              </div>
-              <div className="projects-table">
-                <div style={{ padding: '40px 24px', textAlign: 'center' }}>
-                  <p style={{ fontSize: 15, marginBottom: 12 }}>
-                    Form submissions are delivered to your email via Netlify Forms.
-                  </p>
-                  <a
-                    href="https://app.netlify.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{ color: '#000', fontWeight: 500, textDecoration: 'underline' }}
-                  >
-                    View in Netlify dashboard →
-                  </a>
-                </div>
-              </div>
-            </>
-          )}
-
-          {activeNav === 'settings' && (
-            <>
-              <div className="admin-header">
-                <h1 className="admin-title">Settings</h1>
-              </div>
-              <div className="projects-table" style={{ padding: '32px 24px' }}>
-                <p style={{ fontSize: 14, color: '#666', marginBottom: 24 }}>
-                  To change the admin password, update the <code style={{ background: '#f0f0f0', padding: '2px 6px', borderRadius: 4 }}>ADMIN_PASSWORD</code> constant in <code style={{ background: '#f0f0f0', padding: '2px 6px', borderRadius: 4 }}>pages/admin-login.js</code>.
-                </p>
-                <p style={{ fontSize: 14, color: '#666' }}>
-                  For production use, consider replacing the simple password auth with NextAuth.js or another proper auth provider.
-                </p>
-              </div>
-            </>
-          )}
-        </main>
-      </div>
-
-      {/* Modal */}
-      {showModal && (
-        <div className="modal-overlay" onClick={(e) => e.target === e.currentTarget && setShowModal(false)}>
-          <div className="modal">
-            <h2 className="modal-title">{editingProject ? 'Edit project' : 'Add project'}</h2>
-
-            <div className="form-field">
-              <label className="form-label">PROJECT NAME</label>
-              <input
-                type="text"
-                className="form-input"
-                placeholder="e.g. Lovable"
-                value={form.name}
-                onChange={(e) => setForm({ ...form, name: e.target.value })}
-                autoFocus
-              />
-            </div>
-
-            <div className="form-field">
-              <label className="form-label">CATEGORY</label>
-              <select
-                className="form-select"
-                value={form.category}
-                onChange={(e) => setForm({ ...form, category: e.target.value })}
-              >
-                <option>Brand Sprint</option>
-                <option>Full Brand</option>
-                <option>Venture Design</option>
-              </select>
-            </div>
-
-            <div className="form-field">
-              <label className="form-label">YEAR</label>
-              <input
-                type="text"
-                className="form-input"
-                placeholder="2024"
-                value={form.year}
-                onChange={(e) => setForm({ ...form, year: e.target.value })}
-              />
-            </div>
-
-            <div className="form-field">
-              <label className="form-label">STATUS</label>
-              <select
-                className="form-select"
-                value={form.status}
-                onChange={(e) => setForm({ ...form, status: e.target.value })}
-              >
-                <option value="draft">Draft</option>
-                <option value="published">Published</option>
-              </select>
-            </div>
-
-            <div className="modal-actions">
-              <button className="admin-btn secondary" onClick={() => setShowModal(false)}>Cancel</button>
-              <button className="admin-btn" onClick={handleSave}>
-                {editingProject ? 'Save changes' : 'Add project'}
-              </button>
-            </div>
+        <div className="cms-main">
+          <div className="cms-header">
+            <h1 className="cms-title">Projects</h1>
+            <button className="cms-add-btn" onClick={startAdd}>+ Add project</button>
           </div>
+          {saved && <div className="cms-saved">Saved ✓</div>}
+
+          {/* Project list */}
+          <div className="cms-list">
+            {projects.map(p => (
+              <div key={p.id} className="cms-row">
+                <div className="cms-row-swatch" style={{ background: p.bg }} />
+                <div className="cms-row-info">
+                  <strong>{p.name}</strong>
+                  <span>{p.category}</span>
+                </div>
+                <p className="cms-row-desc">{p.description}</p>
+                <div className="cms-row-actions">
+                  <button className="cms-edit-btn" onClick={() => startEdit(p)}>Edit</button>
+                  <button className="cms-del-btn" onClick={() => deleteProject(p.id)}>Delete</button>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Edit/Add modal */}
+          {editing && (
+            <div className="cms-modal-bg" onClick={() => setEditing(null)}>
+              <div className="cms-modal" onClick={e => e.stopPropagation()}>
+                <h2 className="cms-modal-title">{editing === 'new' ? 'Add project' : 'Edit project'}</h2>
+                <form onSubmit={submitForm} className="cms-form">
+                  <label className="cms-label">Project name
+                    <input className="cms-input" value={form.name} onChange={e => setForm({...form, name: e.target.value})} required />
+                  </label>
+                  <label className="cms-label">Category
+                    <input className="cms-input" value={form.category} onChange={e => setForm({...form, category: e.target.value})} />
+                  </label>
+                  <label className="cms-label">Background (color or gradient)
+                    <input className="cms-input" value={form.bg} onChange={e => setForm({...form, bg: e.target.value})} placeholder="e.g. #c8f040 or linear-gradient(...)"/>
+                    <div className="cms-color-preview" style={{ background: form.bg }} />
+                  </label>
+                  <label className="cms-label">Description
+                    <textarea className="cms-input cms-textarea" value={form.description} onChange={e => setForm({...form, description: e.target.value})} rows="3"/>
+                  </label>
+                  <div className="cms-form-actions">
+                    <button type="button" className="cms-cancel-btn" onClick={() => setEditing(null)}>Cancel</button>
+                    <button type="submit" className="cms-save-btn">Save project</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          )}
         </div>
-      )}
+      </div>
     </>
   )
 }
