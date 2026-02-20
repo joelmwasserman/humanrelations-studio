@@ -3,85 +3,53 @@ import Nav from '../components/Nav'
 import Link from 'next/link'
 
 const projects = [
-  { name: 'Lovable', slug: 'lovable', color: '#e8d5f5' },
-  { name: 'Craft', slug: 'craft', color: '#d5e8f5' },
-  { name: 'Loti', slug: 'loti', color: '#f5e8d5' },
-  { name: 'Gist', slug: 'gist', color: '#d5f5e8' },
-  { name: 'Heron', slug: 'heron', color: '#c8d8e8' },
-  { name: 'Paper', slug: 'paper', color: '#f0f0e8' },
-  { name: 'Titan', slug: 'titan', color: '#e8e8f0' },
-  { name: 'Frame', slug: 'frame', color: '#f5d5d5' },
-  { name: 'Alan', slug: 'alan', color: '#d5f5f5' },
-  { name: 'Vagus', slug: 'vagus', color: '#f5f5d5' },
-  { name: 'Incentiv', slug: 'incentiv', color: '#e8d5e8' },
-  { name: 'Rebel', slug: 'rebel', color: '#d5e8d5' },
-  { name: 'Longe', slug: 'longe', color: '#f5ddd5' },
-  { name: 'Stellar', slug: 'stellar', color: '#d5ddf5' },
-  { name: 'SliceSpace', slug: 'slicespace', color: '#f5e8e8' },
+  { name: 'Lovable',   bg: 'linear-gradient(135deg, #d040b8 0%, #5040d8 100%)' },
+  { name: 'Craft',     bg: '#b8dde8' },
+  { name: 'Loti',      bg: 'linear-gradient(120deg, #8898a8 0%, #607080 100%)' },
+  { name: 'Gist',      bg: '#111' },
+  { name: 'Heron',     bg: 'linear-gradient(135deg, #a0c4ff 0%, #6080c0 100%)' },
+  { name: 'Paper',     bg: '#e8e0d4' },
+  { name: 'Titan',     bg: 'linear-gradient(135deg, #ff9060 0%, #c04020 100%)' },
+  { name: 'Frame',     bg: '#2a2a2a' },
+  { name: 'Rebel',     bg: '#c8f040' },
+  { name: 'Stellar',   bg: 'linear-gradient(135deg, #c0a0ff 0%, #8060c0 100%)' },
 ]
 
 export default function Work() {
   return (
     <>
       <Head>
-        <title>Work | Human Relations. Strategic brand partner</title>
-        <meta name="description" content="Brand sprints done in just two weeks." />
+        <title>Work | Human Relations</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
-
-      <div className="page work-page">
+      <div className="site">
         <Nav />
-
-        <div className="page-hero">
-          <h1 className="page-hero-title fade-up">Sprints done in<br />just two weeks</h1>
-        </div>
-
-        <div className="work-projects">
-          {projects.map((project, i) => (
-            <div
-              key={project.slug}
-              className="project-card fade-up"
-              style={{ animationDelay: `${i * 0.05}s` }}
-            >
-              <div
-                className="project-card-image"
-                style={{ background: `linear-gradient(135deg, ${project.color} 0%, ${project.color}aa 100%)` }}
-              >
-                {project.name}
+        <div className="page-wrap">
+          <div className="page-hero">
+            <h1 className="page-h1">Sprints done in<br />just two weeks</h1>
+            <p className="page-sub">Zero to full brand, every time.</p>
+          </div>
+          <div className="projects-grid">
+            {projects.map((p) => (
+              <div key={p.name} className="project-card" style={{ background: p.bg }}>
+                <span className={`project-tag${p.bg === '#c8f040' || p.bg === '#e8e0d4' || p.bg === '#b8dde8' ? ' project-tag-dark' : ''}`}>
+                  → {p.name}
+                </span>
               </div>
-              <div className="project-card-info">
-                <span className="project-name">{project.name}</span>
-                <span className="project-arrow">→</span>
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
 
         {/* CTA */}
-        <section className="cta-footer" id="contact">
-          <div className="cta-footer-left">
-            <h2 className="cta-footer-headline">Sprint past the competition</h2>
-            <p className="cta-footer-sub">Zero to full brand in two weeks. Let's get to work.</p>
+        <section className="cta" id="contact">
+          <div className="cta-pill">
+            <div className="cta-bolt">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="32" height="32"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+            </div>
+            <span className="cta-pill-txt">Sprint past the competition</span>
           </div>
-          <form
-            name="contact"
-            method="POST"
-            data-netlify="true"
-            netlify-honeypot="bot-field"
-            className="cta-form"
-          >
-            <input type="hidden" name="form-name" value="contact" />
-            <div className="cta-form-field">
-              <input type="text" name="name" placeholder="Your name" required />
-            </div>
-            <div className="cta-form-field">
-              <input type="email" name="email" placeholder="Email address" required />
-            </div>
-            <div className="cta-form-field">
-              <input type="text" name="company" placeholder="Company / startup name" />
-            </div>
-            <button type="submit" className="cta-form-submit">Send →</button>
-          </form>
+          <p className="cta-sub">Zero to full brand in two weeks. Let's get to work.</p>
+          <Link href="/#contact" className="cta-btn">Reserve your spot</Link>
         </section>
       </div>
     </>
