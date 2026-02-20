@@ -20,7 +20,7 @@ export default function Home() {
     <>
       <Head>
         <title>Human Relations. Strategic brand partner</title>
-        <meta name="description" content="Blazing fast brand sprints for startups." />
+        <meta name="description" content="Blazzzzzing fast brand sprints for startup." />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 
@@ -29,7 +29,7 @@ export default function Home() {
 
         {/* 1. HERO: headline, 2x2 mosaic image, 3 staggered tags */}
         <section className="hero">
-          <h1 className="hero-h1">Blazing fast brand<br />sprints for startups</h1>
+          <h1 className="hero-h1">Blazzzzzing fast brand<br />sprints for startup</h1>
           <div className="hero-video">
             <div className="hero-video-inner">
               <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
