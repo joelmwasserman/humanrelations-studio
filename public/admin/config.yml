@@ -1,0 +1,87 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: public/uploads
+public_folder: /uploads
+
+collections:
+  - name: projects
+    label: Projects
+    folder: data/projects
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - label: Project Name
+        name: title
+        widget: string
+        hint: "Plain text — e.g. Lovable"
+
+      - label: Category
+        name: category
+        widget: select
+        options:
+          - Brand Sprint
+          - Venture Design
+          - Strategy
+        hint: "Type of engagement"
+
+      - label: Description
+        name: description
+        widget: text
+        hint: "1–2 sentences about the project. Shown on the project page."
+
+      - label: Cover Image
+        name: cover
+        widget: image
+        required: false
+        hint: "Recommended: 1600×1067px (3:2 ratio), JPG or PNG, max 3MB"
+        media_library:
+          config:
+            max_file_size: 3000000
+
+      - label: Cover Video
+        name: video
+        widget: file
+        required: false
+        hint: "Optional: MP4, max 50MB. 1920×1080px recommended. Shown instead of image if provided."
+        media_library:
+          config:
+            max_file_size: 50000000
+
+      - label: Background Color / Gradient
+        name: bg
+        widget: string
+        default: "#cccccc"
+        hint: "CSS value — e.g. #c8f040 or linear-gradient(135deg, #d040b8, #5040d8)"
+
+      - label: Client Name
+        name: client
+        widget: string
+        required: false
+        hint: "Full client/company name if different from project name"
+
+      - label: Year
+        name: year
+        widget: number
+        default: 2025
+        value_type: int
+        hint: "Year completed"
+
+      - label: Featured
+        name: featured
+        widget: boolean
+        default: false
+        hint: "Show on homepage work grid"
+
+      - label: Tags
+        name: tags
+        widget: list
+        required: false
+        hint: "e.g. Identity, Motion, Web — comma separated"
+
+      - label: Full Project Body
+        name: body
+        widget: markdown
+        required: false
+        hint: "Full case study content. Supports images, headings, etc."
