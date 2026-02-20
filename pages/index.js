@@ -29,7 +29,7 @@ export default function Home() {
 
         {/* 1. HERO: headline, 2x2 mosaic image, 3 staggered tags */}
         <section className="hero">
-          <h1 className="hero-h1">Hot fast brand<br />sprints for startup</h1>
+          <h1 className="hero-h1">Cold fast brand<br />sprints for startup</h1>
           <div className="hero-video">
             <div className="hero-video-inner">
               <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
