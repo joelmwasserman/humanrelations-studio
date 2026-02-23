@@ -19,10 +19,10 @@ export default function AdminLogin() {
 
   return (
     <>
-      <Head><title>Admin | Human Relations</title></Head>
+      <Head><title>Human Relations Studio</title></Head>
       <div className="admin-login">
         <form className="admin-box" onSubmit={handleSubmit}>
-          <div className="admin-logo">Human Relations</div>
+          <div className="admin-logo">Human Relations Studio</div>
           <h2 className="admin-title">Studio admin</h2>
           <input
             className="admin-input"

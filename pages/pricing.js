@@ -15,7 +15,7 @@ export default function Pricing() {
   return (
     <>
       <Head>
-        <title>Pricing | Human Relations</title>
+        <title>Human Relations Studio</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <div className="site">
@@ -32,7 +32,7 @@ export default function Pricing() {
               <thead>
                 <tr>
                   <th></th>
-                  <th className="price-col-us">Human Relations<span className="price-badge">$75k</span></th>
+                  <th className="price-col-us">Human Relations Studio<span className="price-badge">$75k</span></th>
                   <th className="price-col-them">Traditional Agencies<span className="price-badge price-badge-gray">$125k+</span></th>
                 </tr>
               </thead>

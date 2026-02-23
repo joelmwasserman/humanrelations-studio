@@ -1,9 +1,9 @@
 ---
-title: Lovable
+title: Coming Soon
 category: Brand Sprint
-description: Full brand identity for a fast-growing AI startup.
-bg: "linear-gradient(135deg, #d040b8 0%, #5040d8 100%)"
-client: Lovable
+description: Case study details coming soon.
+bg: "#dcdcd7"
+client: Coming Soon
 year: 2024
 featured: true
 tags:

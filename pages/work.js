@@ -7,7 +7,7 @@ export default function Work() {
   return (
     <>
       <Head>
-        <title>Work | Human Relations</title>
+        <title>Human Relations Studio</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <div className="site">
@@ -16,16 +16,13 @@ export default function Work() {
           <h1 className="page-h1">Sprints done in<br />just two weeks</h1>
           <div className="projects-grid">
             {projects.map((p) => (
-              <Link key={p.slug} href={'/work/' + p.slug} className="project-card" style={{ background: p.bg }}>
+              <Link key={p.slug} href={'/work/' + p.slug} className="project-card project-card-placeholder">
                 <div className="project-card-info">
-                  <span className="project-card-name" style={{ color: p.dark ? 'rgba(0,0,0,0.7)' : 'rgba(255,255,255,0.9)' }}>
+                  <span className="project-card-name">
                     {p.name}
                   </span>
-                  <span className="project-card-tag" style={{
-                    background: p.dark ? 'rgba(0,0,0,0.12)' : 'rgba(255,255,255,0.15)',
-                    color: p.dark ? 'rgba(0,0,0,0.6)' : 'rgba(255,255,255,0.85)'
-                  }}>
-                    View project
+                  <span className="project-card-tag project-card-tag-placeholder">
+                    Placeholder
                   </span>
                 </div>
               </Link>

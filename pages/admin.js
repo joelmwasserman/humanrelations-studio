@@ -5,11 +5,11 @@ import Head from 'next/head'
 const STORAGE_KEY = 'hr_projects'
 
 const defaultProjects = [
-  { id: 1, name: 'Lovable',  category: 'Brand Sprint', bg: 'linear-gradient(135deg, #d040b8 0%, #5040d8 100%)', description: 'Full brand identity for AI startup.' },
-  { id: 2, name: 'Craft',   category: 'Brand Sprint', bg: '#b8dde8', description: 'Design system and brand for productivity tool.' },
-  { id: 3, name: 'Loti',    category: 'Brand Sprint', bg: 'linear-gradient(120deg, #8898a8 0%, #607080 100%)', description: 'Brand identity for fintech startup.' },
-  { id: 4, name: 'Gist',    category: 'Brand Sprint', bg: '#111', description: 'Dark brand for AI notes app.' },
-  { id: 5, name: 'Rebel',   category: 'Brand Sprint', bg: '#c8f040', description: 'Bold identity for challenger brand.' },
+  { id: 1, name: 'Coming Soon', category: 'Brand Sprint', bg: '#dcdcd7', description: 'Case study details coming soon.' },
+  { id: 2, name: 'Coming Soon', category: 'Brand Sprint', bg: '#dcdcd7', description: 'Case study details coming soon.' },
+  { id: 3, name: 'Coming Soon', category: 'Brand Sprint', bg: '#dcdcd7', description: 'Case study details coming soon.' },
+  { id: 4, name: 'Coming Soon', category: 'Brand Sprint', bg: '#dcdcd7', description: 'Case study details coming soon.' },
+  { id: 5, name: 'Coming Soon', category: 'Brand Sprint', bg: '#dcdcd7', description: 'Case study details coming soon.' },
 ]
 
 export default function Admin() {
@@ -51,11 +51,11 @@ export default function Admin() {
 
   return (
     <>
-      <Head><title>Admin CMS | Human Relations</title></Head>
+      <Head><title>Human Relations Studio</title></Head>
       <div className="cms-wrap">
         {/* Sidebar */}
         <div className="cms-sidebar">
-          <div className="cms-brand">Human Relations</div>
+          <div className="cms-brand">Human Relations Studio</div>
           <nav className="cms-nav">
             <span className="cms-nav-item cms-nav-active">Projects</span>
           </nav>
