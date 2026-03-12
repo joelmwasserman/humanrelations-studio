@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Human Relations Studio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet" />
+  <link href="https://api.fontshare.com/v2/css?f[]=reckless-neue@400,500&display=swap" rel="stylesheet" />
+  <style>
+    html { scroll-behavior: smooth; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --side-spacing: clamp(24px, 5vw, 72px);
+    }
+
+    body {
+      font-family: 'Instrument Sans', sans-serif;
+      background: #ffffff;
+      color: #111111;
+    }
+
+    /* ── NAV ── */
+    nav {
+      background: #F4F4F4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px var(--side-spacing);
+      height: 86px;
+    }
+    .nav-inner {
+      display: flex;
+      gap: 28px;
+      align-items: center;
+      justify-content: center;
+      background: #ffffff;
+      padding: 15px 40px;
+      border-radius: 9999px;
+    }
+    .nav-inner a {
+      font-size: 16px;
+      font-weight: 500;
+      letter-spacing: 0.024em;
+      color: #111111;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .nav-inner a:hover { opacity: 0.6; }
+
+    /* ── HERO ── */
+    .hero { background: #F4F4F4; }
+
+    .hero-header {
+      padding: 80px var(--side-spacing) 80px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .hero-headline {
+      font-family: 'Reckless Neue', serif;
+      font-size: clamp(41px, 5.56vw, 80px);
+      font-weight: 400;
+      color: #181818;
+      line-height: 1.1;
+      letter-spacing: -0.044em;
+      max-width: 1221px;
+      text-align: center;
+    }
+
+    .hero-image {
+      width: 100%;
+      height: 742px;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* ── MARQUEE ── */
+    .logo-marquee {
+      background: #F4F4F4;
+      height: 128px;
+      overflow: hidden;
+      position: relative;
+    }
+    .logo-marquee::before,
+    .logo-marquee::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 120px;
+      z-index: 2;
+    }
+    .logo-marquee::before {
+      left: 0;
+      background: linear-gradient(to right, #F4F4F4, transparent);
+    }
+    .logo-marquee::after {
+      right: 0;
+      background: linear-gradient(to left, #F4F4F4, transparent);
+    }
+    .marquee-track {
+      display: flex;
+      align-items: center;
+      height: 100%;
+      width: max-content;
+      animation: marquee 18s linear infinite;
+    }
+    .marquee-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 160px;
+      height: 80px;
+      margin-right: 56px;
+      flex-shrink: 0;
+    }
+    .marquee-item span {
+      font-size: 14px;
+      font-weight: 500;
+      color: #9D9D9D;
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+    }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    /* ── PROJECTS ── */
+    .proj {
+      background: #F4F4F4;
+      padding: 88px var(--side-spacing);
+      display: flex;
+      flex-direction: column;
+      gap: 36px;
+      align-items: center;
+    }
+    .section-label {
+      font-size: 12px;
+      font-weight: 400;
+      color: #4A4A4A;
+      letter-spacing: 0.11em;
+      line-height: 16px;
+      text-transform: uppercase;
+    }
+    .what-we-do-title {
+      font-family: 'Reckless Neue', serif;
+      font-size: clamp(31px, 4.44vw, 64px);
+      font-weight: 400;
+      color: #181818;
+      line-height: 1;
+      letter-spacing: -0.04em;
+      max-width: 1077px;
+      text-align: center;
+    }
+    .cta-row { display: flex; gap: 12px; align-items: center; justify-content: center; }
+    .pill-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px 20px;
+      border-radius: 9999px;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      cursor: pointer;
+      text-decoration: none;
+      border: 2px solid #000000;
+      white-space: nowrap;
+    }
+    .pill-btn.dark { background: #000000; color: #ffffff; }
+    .pill-btn.light { background: transparent; color: #000000; }
+
+    .proj-label-row {
+      display: flex;
+      justify-content: flex-start;
+      width: 100%;
+    }
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      width: 100%;
+    }
+    .project-card {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .card-info {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .card-img-wrap {
+      position: relative;
+      border-radius: 15px;
+      overflow: hidden;
+      aspect-ratio: 418.66 / 521;
+    }
+    .card-img-wrap img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .card-labels {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      right: 20px;
+      display: flex;
+      gap: 10px;
+    }
+    .card-label {
+      font-size: 12px;
+      font-weight: 500;
+      color: #ffffff;
+      background: rgba(0,0,0,0.42);
+      padding: 8px 14px;
+      border-radius: 9999px;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+    .card-title {
+      font-size: 24px;
+      font-weight: 500;
+      color: #222222;
+      line-height: 32px;
+      letter-spacing: -0.026em;
+    }
+    .card-subtitle {
+      font-size: 16px;
+      font-weight: 400;
+      color: #888888;
+      line-height: 20px;
+    }
+
+    /* ── META (WHO WE ARE) ── */
+    .meta {
+      background: #ffffff;
+    }
+    .meta-inner {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 80px var(--side-spacing);
+      display: flex;
+      flex-direction: column;
+      gap: 100px;
+    }
+    .bio-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 60px;
+    }
+    .bio-text-col {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      flex: 1;
+      min-width: 0;
+    }
+    .bio-body-lg {
+      font-size: clamp(20px, 2.22vw, 32px);
+      font-weight: 400;
+      color: #050505;
+      line-height: 1.0;
+      max-width: 746px;
+    }
+    .bio-body-sm {
+      font-size: clamp(16px, 1.67vw, 24px);
+      font-weight: 400;
+      color: #050505;
+      line-height: 1.33;
+      max-width: 755px;
+    }
+    .bio-image {
+      width: 340px;
+      height: 340px;
+      border-radius: 50%;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+    .services-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 40px;
+    }
+    .services-label-col {
+      width: 199px;
+      flex-shrink: 0;
+      padding-top: 3px;
+    }
+    .services-col {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 400px;
+      flex-shrink: 0;
+    }
+    .services-col-header {
+      font-size: 18px;
+      font-weight: 700;
+      color: #050505;
+      line-height: normal;
+    }
+    .services-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .service-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 25px;
+    }
+    .service-text {
+      font-size: 18px;
+      font-weight: 400;
+      color: #050505;
+      line-height: 16px;
+    }
+    .service-plus {
+      font-size: 14px;
+      font-weight: 700;
+      color: #050505;
+      width: 16px;
+      text-align: center;
+    }
+    .divider {
+      height: 1px;
+      background: #C8C8C8;
+    }
+    .how-col {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      width: 400px;
+      flex-shrink: 0;
+    }
+    .how-col-header {
+      font-size: 18px;
+      font-weight: 700;
+      color: #050505;
+      line-height: normal;
+    }
+    .how-col-body {
+      font-size: 18px;
+      font-weight: 400;
+      color: #050505;
+      line-height: 1.44;
+    }
+
+    /* ── TESTIMONIALS ── */
+    .testimonials {
+      background: #050505;
+    }
+    .testimonials-inner {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 88px var(--side-spacing) 72px;
+      display: flex;
+      flex-direction: column;
+      gap: 56px;
+      align-items: flex-start;
+    }
+    .testimonial-block {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      width: 100%;
+    }
+    .testimonial-quote {
+      font-size: clamp(22px, 2.78vw, 40px);
+      font-weight: 400;
+      color: #F1F1F1;
+      line-height: 1.0;
+    }
+    .author-block {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .author-name {
+      font-size: clamp(20px, 2.22vw, 32px);
+      font-weight: 400;
+      color: #F1F1F1;
+    }
+    .author-role {
+      font-size: clamp(16px, 2.22vw, 32px);
+      font-weight: 400;
+      color: #6B6B6B;
+    }
+    .pagination-dots {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      justify-content: center;
+      align-self: center;
+    }
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 4px;
+      background: #4A4A4A;
+    }
+    .dot.active { background: #F1F1F1; }
+
+    /* ── CONTACT ── */
+    .contact {
+      background: #f0ede8;
+      padding: 96px var(--side-spacing);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      min-height: 452px;
+      text-align: center;
+    }
+    .contact-headline {
+      font-family: 'Reckless Neue', serif;
+      font-size: clamp(36px, 4.44vw, 64px);
+      font-weight: 400;
+      color: #181818;
+      letter-spacing: -0.04em;
+      line-height: 1;
+    }
+    .contact-sub {
+      font-size: clamp(18px, 2.22vw, 32px);
+      font-weight: 400;
+      color: #050505;
+      line-height: 1.0;
+      max-width: 794px;
+    }
+
+    /* ── FOOTER ── */
+    .footer-main {
+      background: #151515;
+      padding: 80px var(--side-spacing) 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      min-height: 285px;
+      justify-content: flex-end;
+    }
+    .foot-cols {
+      display: flex;
+      gap: 30px;
+    }
+    .foot-col {
+      font-size: 16px;
+      font-weight: 400;
+      color: #CCCCCC;
+      line-height: 16px;
+      white-space: pre-line;
+    }
+    .foot-col strong {
+      color: #ffffff;
+      font-weight: 400;
+    }
+    .footer-logo {
+      background: #151515;
+      padding: 10px var(--side-spacing) 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .footer-logo-img {
+      width: 100%;
+      max-height: 105px;
+      object-fit: contain;
+      object-position: left;
+    }
+    .footer-bottom-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-copy {
+      font-size: 14px;
+      font-weight: 400;
+      color: #8C8C8C;
+    }
+    .back-to-top {
+      font-size: 14px;
+      font-weight: 400;
+      color: #8C8C8C;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .back-to-top:hover { color: #CCCCCC; }
+
+    /* ── FLOATING NAV ── */
+    .float-nav {
+      display: none;
+    }
+    @media (max-width: 768px) {
+    .float-nav {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 999;
+      display: flex;
+      gap: 5px;
+      align-items: center;
+      padding: 5px;
+      border-radius: 18px;
+      background: rgba(83, 83, 83, 0.5);
+      backdrop-filter: blur(40px);
+      -webkit-backdrop-filter: blur(40px);
+      font-size: 14px;
+      font-family: 'Instrument Sans', sans-serif;
+    }
+    .float-nav-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      border-radius: 13px;
+      padding: 12px 15px;
+      font-size: 13px;
+      font-family: 'Instrument Sans', sans-serif;
+      font-weight: 500;
+      line-height: 1;
+      color: rgba(255,255,255,0.75);
+      background: rgba(255, 255, 255, 0.12);
+      cursor: pointer;
+      border: none;
+      outline: none;
+      white-space: nowrap;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+    .float-nav-btn:hover {
+      background: rgba(255,255,255,0.2);
+      color: #ffffff;
+    }
+    .float-nav-btn.active {
+      background: rgba(255,255,255,0.22);
+      color: #ffffff;
+    }
+    .float-nav-num {
+      opacity: 0.6;
+      font-size: 13px;
+      line-height: 1;
+    }
+    .float-nav-label {
+      width: 0;
+      opacity: 0;
+      overflow: hidden;
+      transition: width 0.3s ease, opacity 0.3s ease;
+      display: inline-block;
+      line-height: 1;
+    }
+    .float-nav-btn.active .float-nav-label {
+      width: var(--label-w);
+      opacity: 1;
+    }
+    } /* end mobile float-nav */
+
+    /* ── MOBILE RESPONSIVE ── */
+    @media (max-width: 768px) {
+      :root { --side-spacing: 20px; }
+      nav { display: none; }
+
+      .hero-header { padding: 60px var(--side-spacing) 36px; }
+      .hero-image { height: 280px; }
+
+      .logo-marquee::before,
+      .logo-marquee::after { width: 48px; }
+      .marquee-item { width: 80px; margin-right: 32px; }
+
+      .proj { padding: 48px 20px; gap: 24px; }
+      .card-grid { grid-template-columns: 1fr; }
+      .card-title { font-size: 20px; line-height: 26px; }
+
+      .meta-inner { padding: 48px 20px; gap: 56px; }
+      .bio-row { flex-direction: column; gap: 28px; }
+      .bio-image { width: 240px; height: 240px; align-self: center; }
+
+      .services-row { flex-direction: column; gap: 28px; }
+      .services-label-col { width: 100%; }
+      .services-col { width: 100%; }
+      .how-col { width: 100%; }
+
+      .testimonials-inner { padding: 56px 24px 48px; }
+      .testimonial-quote { font-size: 22px; }
+
+      .contact { padding: 56px 20px; min-height: auto; }
+      .cta-row { flex-wrap: wrap; }
+
+      .footer-bottom-row { flex-direction: column; align-items: flex-start; gap: 8px; }
+
+      .float-nav { bottom: 12px; }
+      .float-nav-btn { padding: 12px 15px; font-size: 13px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="home">
+    <div class="nav-inner">
+      <a href="#projects">Projects</a>
+      <a href="#about">About</a>
+      <a href="#service">Service</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-header">
+      <h1 class="hero-headline">Brands built for<br>human connection.</h1>
+    </div>
+    <img
+      class="hero-image"
+      src="https://images.unsplash.com/photo-1671174585413-900e64744cf4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NDM0ODN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NzMyNzUwNzd8&ixlib=rb-4.1.0&q=80&w=1440"
+      alt="Hero"
+    />
+
+    <!-- Marquee -->
+    <div class="logo-marquee">
+      <div class="marquee-track">
+        <div class="marquee-item"><span>Yahoo</span></div>
+        <div class="marquee-item"><span>Samsung</span></div>
+        <div class="marquee-item"><span>Pepsi</span></div>
+        <div class="marquee-item"><span>Y Combinator</span></div>
+        <div class="marquee-item"><span>Starbucks</span></div>
+        <div class="marquee-item"><span>Microsoft</span></div>
+        <div class="marquee-item"><span>Honeybook</span></div>
+        <div class="marquee-item"><span>Bowers &amp; Wilkins</span></div>
+        <div class="marquee-item"><span>Freelancer</span></div>
+        <div class="marquee-item"><span>Science</span></div>
+        <div class="marquee-item"><span>Edelman</span></div>
+        <div class="marquee-item"><span>Genius</span></div>
+        <div class="marquee-item"><span>ANZ</span></div>
+        <!-- duplicate for seamless loop -->
+        <div class="marquee-item"><span>Yahoo</span></div>
+        <div class="marquee-item"><span>Samsung</span></div>
+        <div class="marquee-item"><span>Pepsi</span></div>
+        <div class="marquee-item"><span>Y Combinator</span></div>
+        <div class="marquee-item"><span>Starbucks</span></div>
+        <div class="marquee-item"><span>Microsoft</span></div>
+        <div class="marquee-item"><span>Honeybook</span></div>
+        <div class="marquee-item"><span>Bowers &amp; Wilkins</span></div>
+        <div class="marquee-item"><span>Freelancer</span></div>
+        <div class="marquee-item"><span>Science</span></div>
+        <div class="marquee-item"><span>Edelman</span></div>
+        <div class="marquee-item"><span>Genius</span></div>
+        <div class="marquee-item"><span>ANZ</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section class="proj" id="projects">
+    <p class="what-we-do-title">We're a branding studio helping emerging places and ambitious ventures become brands people believe in.</p>
+    <div class="cta-row">
+      <a href="#contact" class="pill-btn dark">Book a call</a>
+      <a href="#about" class="pill-btn light">Learn more</a>
+    </div>
+    <div class="proj-label-row">
+      <span class="section-label">FEATURED WORK</span>
+    </div>
+    <div class="card-grid">
+      <!-- Row 1 -->
+      <div class="project-card">
+        <div class="card-img-wrap">
+          <img src="https://images.unsplash.com/photo-1646805925007-510be75f20f7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NDM0ODN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NzMyNzUzMjV8&ixlib=rb-4.1.0&q=80&w=800" alt="Mountains Blue" />
+          <div class="card-labels">
+            <span class="card-label">Coming Soon</span>
+            <span class="card-label">Property</span>
+          </div>
+        </div>
+        <div class="card-info">
+          <p class="card-title">Mountains Blue</p>
+          <p class="card-subtitle">Alpine retreat &amp; residences</p>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="card-img-wrap">
+          <img src="https://images.unsplash.com/photo-1767525425479-cae05eb1928f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NDM0ODN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NzMyNzUzMjV8&ixlib=rb-4.1.0&q=80&w=800" alt="Hideaway" />
+          <div class="card-labels">
+            <span class="card-label">Preview</span>
+            <span class="card-label">Hospitality</span>
+          </div>
+        </div>
+        <div class="card-info">
+          <p class="card-title">Hideaway</p>
+          <p class="card-subtitle">High-end restaurant &amp; bar</p>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="card-img-wrap">
+          <img src="https://images.unsplash.com/photo-1758551059627-e891d671e010?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NDM0ODN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NzMyNzUzMjZ8&ixlib=rb-4.1.0&q=80&w=800" alt="Blockmate" />
+          <div class="card-labels">
+            <span class="card-label">Preview</span>
+            <span class="card-label">Consumer Tech</span>
+          </div>
+        </div>
+        <div class="card-info">
+          <p class="card-title">Blockmate</p>
+          <p class="card-subtitle">Parental control platform</p>
+        </div>
+      </div>
+      <!-- Row 2 -->
+      <div class="project-card">
+        <div class="card-img-wrap">
+          <img src="https://images.unsplash.com/photo-1646805925007-510be75f20f7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NDM0ODN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NzMyNzUzMjV8&ixlib=rb-4.1.0&q=80&w=800" alt="Keypa" />
+          <div class="card-labels">
+            <span class="card-label">Preview</span>
+            <span class="card-label">PropTech</span>
+          </div>
+        </div>
+        <div class="card-info">
+          <p class="card-title">Keypa</p>
+          <p class="card-subtitle">AI for Trades marketplace platform</p>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="card-img-wrap">
+          <img src="https://images.unsplash.com/photo-1767525425479-cae05eb1928f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NDM0ODN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NzMyNzUzMjV8&ixlib=rb-4.1.0&q=80&w=800" alt="GoodStrata" />
+          <div class="card-labels">
+            <span class="card-label">Preview</span>
+            <span class="card-label">PropTech</span>
+          </div>
+        </div>
+        <div class="card-info">
+          <p class="card-title">GoodStrata</p>
+          <p class="card-subtitle">AI strata management platform</p>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="card-img-wrap">
+          <img src="https://images.unsplash.com/photo-1758551059627-e891d671e010?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NDM0ODN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NzMyNzUzMjZ8&ixlib=rb-4.1.0&q=80&w=800" alt="Honeybook" />
+          <div class="card-labels">
+            <span class="card-label">Preview</span>
+            <span class="card-label">SaaS Unicorn</span>
+          </div>
+        </div>
+        <div class="card-info">
+          <p class="card-title">Honeybook</p>
+          <p class="card-subtitle">SaaS Unicorn</p>
+        </div>
+      </div>
+      <!-- Row 3 -->
+      <div class="project-card">
+        <div class="card-img-wrap">
+          <img src="https://images.unsplash.com/photo-1646805925007-510be75f20f7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NDM0ODN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NzMyNzUzMjV8&ixlib=rb-4.1.0&q=80&w=800" alt="East Partnership" />
+          <div class="card-labels">
+            <span class="card-label">Preview</span>
+            <span class="card-label">Recruitment</span>
+          </div>
+        </div>
+        <div class="card-info">
+          <p class="card-title">East Partnership</p>
+          <p class="card-subtitle">Executive recruitment firm</p>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="card-img-wrap">
+          <img src="https://images.unsplash.com/photo-1767525425479-cae05eb1928f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NDM0ODN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NzMyNzUzMjV8&ixlib=rb-4.1.0&q=80&w=800" alt="Landing Pad" />
+          <div class="card-labels">
+            <span class="card-label">Preview</span>
+            <span class="card-label">Venture</span>
+          </div>
+        </div>
+        <div class="card-info">
+          <p class="card-title">Landing Pad</p>
+          <p class="card-subtitle">A platform where startups land.</p>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="card-img-wrap">
+          <img src="https://images.unsplash.com/photo-1758551059627-e891d671e010?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NDM0ODN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NzMyNzUzMjZ8&ixlib=rb-4.1.0&q=80&w=800" alt="Byronblaze" />
+          <div class="card-labels">
+            <span class="card-label">Preview</span>
+            <span class="card-label">Beverage</span>
+          </div>
+        </div>
+        <div class="card-info">
+          <p class="card-title">Byronblaze</p>
+          <p class="card-subtitle">Functional beverage brand</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- META -->
+  <section class="meta" id="about">
+    <div class="meta-inner">
+      <!-- Who Are We -->
+      <div class="bio-row">
+        <div class="bio-text-col">
+          <span class="section-label">WHO ARE WE</span>
+          <p class="bio-body-lg">We work with founders, hospitality brands and developers to shape the story, identity and experience behind new ventures and emerging places.</p>
+          <p class="bio-body-sm">From early positioning to launch, we help ideas take form in ways people can understand, trust and buy into. We believe the best brands aren't built on features — they're built on feeling.</p>
+        </div>
+        <img class="bio-image" src="images/joel.png" alt="Joel" />
+      </div>
+
+      <!-- Who We Work With -->
+      <div class="services-row" id="service">
+        <div class="services-label-col">
+          <span class="section-label">WHO WE WORK WITH</span>
+        </div>
+        <div class="services-col">
+          <p class="services-col-header">Founders &amp; ventures</p>
+          <div class="services-list">
+            <div class="service-row"><span class="service-text">Identity &amp; digital presence</span><span class="service-plus">+</span></div>
+            <div class="divider"></div>
+            <div class="service-row"><span class="service-text">Launch clarity &amp; momentum</span><span class="service-plus">+</span></div>
+            <div class="divider"></div>
+            <div class="service-row"><span class="service-text">Strategic brand direction</span><span class="service-plus">+</span></div>
+          </div>
+        </div>
+        <div class="services-col">
+          <p class="services-col-header">Property &amp; place</p>
+          <div class="services-list">
+            <div class="service-row"><span class="service-text">Place story development</span><span class="service-plus">+</span></div>
+            <div class="divider"></div>
+            <div class="service-row"><span class="service-text">Guest-facing brand systems</span><span class="service-plus">+</span></div>
+            <div class="divider"></div>
+            <div class="service-row"><span class="service-text">Launch materials &amp; rollout</span><span class="service-plus">+</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- How We Help -->
+      <div class="services-row">
+        <div class="services-label-col">
+          <span class="section-label">HOW WE HELP</span>
+        </div>
+        <div class="how-col">
+          <p class="how-col-header">Brand Sprints</p>
+          <p class="how-col-body">Focused strategic work to define positioning, narrative and identity direction quickly. Ideal for early-stage ventures, hospitality concepts and new developments.</p>
+        </div>
+        <div class="how-col">
+          <p class="how-col-header">GTM support</p>
+          <p class="how-col-body">Continued strategic advisory and creative support across rollout, launch and digital presence.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials">
+    <div class="testimonials-inner">
+      <div class="testimonial-block">
+        <p class="testimonial-quote">"From understanding our ambitions, to crafting the direction, to executing with speed, Primary nailed it from the beginning. We are in love with all of it."</p>
+        <div class="author-block">
+          <p class="author-name">Elliott Rapaport</p>
+          <p class="author-role">CEO, Birches Health</p>
+        </div>
+      </div>
+      <div class="pagination-dots">
+        <div class="dot active"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <h2 class="contact-headline">Start a Project</h2>
+    <p class="contact-sub">We'd love to hear about what you're building. Let's find the right way to work together.</p>
+    <div class="cta-row">
+      <a href="#" class="pill-btn dark">Book a call</a>
+      <a href="#" class="pill-btn light">Message via Whatsapp</a>
+    </div>
+  </section>
+
+  <!-- FOOTER MAIN -->
+  <footer class="footer-main">
+    <div class="foot-cols">
+      <div class="foot-col"><strong>Contact</strong>
+hello@humanrelations.studio
++ 61 (0) 415 088 327</div>
+      <div class="foot-col"><strong>Follow us</strong>
+Instagram
+LinkedIn</div>
+    </div>
+  </footer>
+
+  <!-- FOOTER LOGO BAR -->
+  <div class="footer-logo">
+    <img class="footer-logo-img" src="images/human_relations logo.png" alt="Human Relations" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+    <div style="display:none;height:105px;display:flex;align-items:center;">
+      <span style="font-size:28px;font-weight:500;color:#CCCCCC;letter-spacing:-0.02em;">Human Relations</span>
+    </div>
+    <div class="footer-bottom-row">
+      <span class="footer-copy">Human Relations Studio 2026 . All rights reserved</span>
+      <a class="back-to-top" href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">Back to top ↑</a>
+    </div>
+  </div>
+
+  <!-- FLOATING NAV -->
+  <nav class="float-nav" id="floatNav" aria-label="Section navigation"></nav>
+
+  <script>
+    const SECTIONS = [
+      { label: 'Projects', id: 'projects' },
+      { label: 'About',    id: 'about'    },
+      { label: 'Service',  id: 'service'  },
+      { label: 'Contact',  id: 'contact'  },
+    ];
+
+    // Build buttons
+    const nav = document.getElementById('floatNav');
+    const buttons = SECTIONS.map(({ label, id }) => {
+      const btn = document.createElement('button');
+      btn.className = 'float-nav-btn';
+      btn.dataset.id = id;
+      btn.innerHTML = `<span class="float-nav-num">${label}</span><span class="float-nav-label"></span>`;
+      btn.addEventListener('click', () => {
+        const el = document.getElementById(id);
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      });
+      nav.appendChild(btn);
+      return btn;
+    });
+
+    // Measure natural label widths after render
+    requestAnimationFrame(() => {
+      buttons.forEach(btn => {
+        const label = btn.querySelector('.float-nav-label');
+        // Temporarily make visible to measure
+        label.style.width = 'auto';
+        label.style.opacity = '1';
+        const w = label.scrollWidth;
+        label.style.width = '0';
+        label.style.opacity = '0';
+        btn.style.setProperty('--label-w', w + 'px');
+      });
+    });
+
+    function setActive(id) {
+      buttons.forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.id === id);
+      });
+    }
+
+    // IntersectionObserver — track which section is in view
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) setActive(entry.target.id);
+      });
+    }, { threshold: 0.3 });
+
+    SECTIONS.forEach(({ id }) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    // Default active on load
+    setActive('projects');
+  </script>
+
+</body>
+</html>
