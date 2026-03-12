@@ -1,6 +1,6 @@
 # Human Relations Studio Website
 
-A Next.js website modeled after primary.studio, with:
+A Next.js website with:
 - Home, Work, Pricing pages with full responsive breakpoints
 - Netlify Forms for contact (goes straight to your email)
 - Admin dashboard to manage projects (password protected)
